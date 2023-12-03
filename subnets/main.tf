@@ -5,6 +5,5 @@ resource "aws_subnet" "main" {
   availability_zone = each.value["az"]
 }
 
-
-variable "vpc_id" {}
 variable "subnets" {}
+variable "vpc_id" {}
