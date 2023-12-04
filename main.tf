@@ -4,9 +4,9 @@ resource "aws_vpc" "main" {
 
 
 
-resource "aws_subnet" "main" {
+module "subnets" {
   for_each = var.subnets
-  availability_zone = each.value["az"]
-  cidr_block = each.value["cidr"]
+  source = "./subnets"
+  subnets = each.value
   vpc_id = aws_vpc.main.id
 }
