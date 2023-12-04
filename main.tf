@@ -5,7 +5,8 @@ resource "aws_vpc" "main" {
 
 
 resource "aws_subnet" "main" {
-  availability_zone = var.az
-  cidr_block = var.cidr
+  for_each = var.subnets
+  availability_zone = each.value["az"]
+  cidr_block = each.value["cidr"]
   subnets =var.subnets
 }
