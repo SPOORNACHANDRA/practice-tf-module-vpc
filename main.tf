@@ -8,5 +8,5 @@ resource "aws_subnet" "main" {
   for_each = var.subnets
   availability_zone = each.value["az"]
   cidr_block = each.value["cidr"]
-  subnets =var.subnets
+  vpc_id = aws_vpc.main.id
 }
