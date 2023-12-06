@@ -19,7 +19,8 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-#output "subnet" {
-#  value = module.subnets      # this info we need to send roboshop-pterraform-v1 main.tf
-#                              # # these above are all transmitting the data
-#}
+output "subnet" {
+  value = module.subnets      # this info we need to send roboshop-pterraform-v1 main.tf
+                              # # these above are all transmitting the data
+}
+
