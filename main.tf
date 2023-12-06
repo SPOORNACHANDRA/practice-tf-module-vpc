@@ -41,3 +41,5 @@ resource "aws_nat_gateway" "ngw" {
   allocation_id = lookup(lookup(aws_eip.ngw,each.key,null ),"id",null)
   subnet_id     = each.value["id"]
 }
+
+
