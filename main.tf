@@ -47,13 +47,12 @@ resource "aws_route" "ngw" {
   nat_gateway_id = element(aws_nat_gateway.ngw.*.id,count.index )
 }
 
+resource "aws_vpc_peering_connection" "peering" {
+  peer_vpc_id   = aws_vpc.main.id
+  vpc_id        = aws_vpc.main.id
+  auto_accept = true
+}
 
-#resource "aws_route" "ngw" {
-#count = length(local.private_route_table_ids)
-#route_table_id         = element(local.private_route_table_ids,count.index )
-#destination_cidr_block = "0.0.0.0/0"
-#nat_gateway_id             = element(aws_nat_gateway.ngw.*.id,count.index)
-#}
 #resource "aws_vpc_peering_connection" "peering" {
 #peer_vpc_id = aws_vpc.main.id
 #vpc_id      = var.default_vpc_id
