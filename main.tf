@@ -17,7 +17,9 @@ resource "aws_internet_gateway" "igw" {
     Name = "main"
   }
 }
-
+output "subnet" {
+  value = module.subnets
+}
 resource "aws_route" "igw" {
   for_each               = lookup(lookup(module.subnets, "public", null), "route_table_ids", null)
   route_table_id         = each.value["id"]
@@ -33,6 +35,4 @@ resource "aws_route" "igw" {
 #    gateway_id = aws_internet_gateway.example.id
 #  }
 
-output "subnet" {
-  value = module.subnets
-}
+
