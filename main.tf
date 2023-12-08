@@ -34,25 +34,19 @@ resource "aws_eip" "ngw" {
   domain   = "vpc"
 }
 
-resource "aws_nat_gateway" "nat" {
+resource "aws_nat_gateway" "ngw" {
   count = length(local.public_subnet_ids)
   allocation_id = element(aws_eip.ngw.*.id,count.index)
   subnet_id     = element(local.public_subnet_ids,count.index)
 }
 
+resource "aws_route" "ngw" {
+  count = length(local.pivate_route_table_ids)
+  route_table_id         = element(local.pivate_route_table_ids,count.index )
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id = element(aws_nat_gateway.ngw.*.id,count.index )
+}
 
-
-#resource "aws_eip" "ngw" {
-#  count = length(local.public_subnet_ids)       # we need how many subnets are there those many eip
-#  domain   = "vpc"
-#}
-#
-#resource "aws_nat_gateway" "ngw" {                #how many ngw i want how many public subnets
-#  count = length(local.public_subnet_ids)            # here we can take either output or input we taken form output
-#  allocation_id = element(aws_eip.ngw.*.id,count.index)
-#  subnet_id     = element(local.public_subnet_ids,count.index )
-#}
-#
 
 #resource "aws_route" "ngw" {
 #count = length(local.private_route_table_ids)
