@@ -1,6 +1,6 @@
 resource "aws_vpc" "main" {         #we are consuming the variables here
   cidr_block = var.cidr
-  tags = merge(local.tags,{name="${var.env}-vpc"})
+  tags = merge(local.tags,{Name="${var.env}-vpc"})
 }
 
 module "subnets" {            # we have subnets in that subnets in that subnet we have multiple subnets in that subnets we have multiple values
