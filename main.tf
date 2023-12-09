@@ -16,7 +16,7 @@ module "subnets" {            # we have subnets in that subnets in that subnet w
 #here we can create and attach to vpc is in one shot
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
-  tags = merge(local.tags,{name="${var.env}-igw"})
+  tags = merge(local.tags,{Name="${var.env}-igw"})
 }
 
 resource "aws_route" "igw" {
@@ -40,7 +40,7 @@ resource "aws_nat_gateway" "ngw" {                #how many ngw i want how many 
   count = length(local.public_subnet_ids)            # here we can take either output or input we taken form output
   allocation_id = element(aws_eip.ngw.*.id,count.index)
   subnet_id     = element(local.public_subnet_ids,count.index )
-  tags = merge(local.tags,{name="${var.env}-ngw"})
+  tags = merge(local.tags,{Name="${var.env}-ngw"})
 }
 
 
@@ -54,7 +54,7 @@ resource "aws_vpc_peering_connection" "peering" {
   peer_vpc_id = aws_vpc.main.id
   vpc_id      = var.default_vpc_id
   auto_accept = true
-  tags = merge(local.tags,{name="${var.env}-peer"})
+  tags = merge(local.tags,{Name="${var.env}-peer"})
 }
 
 resource "aws_route" "peer" {
