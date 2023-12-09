@@ -38,10 +38,10 @@ resource "aws_nat_gateway" "ngw" {                #how many ngw i want how many 
   tags = merge(local.tags,{name="${var.env}-ngw"})
 }
 
-output "subnet" {
-  value = module.subnets      # this info we need to send roboshop-pterraform-v1 main.tf
-  # # these above are all transmitting the data
-}
+#output "subnet" {
+#  value = module.subnets      # this info we need to send roboshop-pterraform-v1 main.tf
+#  # # these above are all transmitting the data
+#}
 
 resource "aws_route" "ngw" {
   count = length(local.private_route_table_ids)
