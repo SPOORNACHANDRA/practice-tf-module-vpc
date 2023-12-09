@@ -26,6 +26,11 @@ resource "aws_route" "igw" {
   gateway_id = aws_internet_gateway.igw.id
 }
 
+output "subnet" {
+  value = module.subnets      # this info we need to send roboshop-pterraform-v1 main.tf
+  # # these above are all transmitting the data
+}
+
 resource "aws_eip" "ngw" {
   count = length(local.public_subnet_ids)       # we need how many subnets are there those many eip
   domain   = "vpc"
@@ -38,10 +43,6 @@ resource "aws_nat_gateway" "ngw" {                #how many ngw i want how many 
   tags = merge(local.tags,{name="${var.env}-ngw"})
 }
 
-#output "subnet" {
-#  value = module.subnets      # this info we need to send roboshop-pterraform-v1 main.tf
-#  # # these above are all transmitting the data
-#}
 
 resource "aws_route" "ngw" {
   count = length(local.private_route_table_ids)
