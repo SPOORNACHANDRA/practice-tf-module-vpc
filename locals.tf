@@ -12,5 +12,4 @@ locals {
   private_route_table_ids = concat(local.app_route_table_ids,local.db_route_table_ids)
   #tags
   tags = merge(var.tags,{tf-module-name = "vpc"},{env = var.env})
-
 }
