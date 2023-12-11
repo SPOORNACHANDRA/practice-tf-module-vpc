@@ -26,10 +26,6 @@ resource "aws_route" "igw" {
   gateway_id = aws_internet_gateway.igw.id
 }
 
-output "subnets" {
-  value = module.subnets      # this info we need to send roboshop-pterraform-v1 main.tf
-  # # these above are all transmitting the data
-}
 
 resource "aws_eip" "ngw" {
   count = length(local.public_subnet_ids)       # we need how many subnets are there those many eip

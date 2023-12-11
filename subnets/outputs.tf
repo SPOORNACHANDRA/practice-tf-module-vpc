@@ -7,6 +7,7 @@ output "route_table_ids" {      #for attaching igw to public subnets only
   value = aws_route_table.main   # first of all these guy has to send out the info to the tf-module-vpc main.tf
 }
 
-output "subnets" {
-  value = var.vpc_id
-}
+
+#output "ngw" {
+#  value = aws_route_table_association.a
+#}
