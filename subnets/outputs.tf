@@ -8,5 +8,5 @@ output "route_table_ids" {      #for attaching igw to public subnets only
 }
 
 output "subnets" {
-  value = aws_subnet.main.id
+  value = var.vpc_id
 }
